@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -6,6 +7,7 @@ import 'package:my_company/Screens/sign_in/login.dart';
 import 'package:my_company/components/rounded_button.dart';
 import 'package:postgres/postgres.dart';
 import '../../constants.dart';
+import 'package:http/http.dart' as http;
 
 class Register5 extends StatefulWidget {
   final String mail;
@@ -16,8 +18,6 @@ class Register5 extends StatefulWidget {
 }
 
 class _Register5State extends State<Register5> {
-  var connection = new PostgreSQLConnection("10.0.2.2", 5432, "Logimes",
-      username: "postgres", password: "admin");
   int a;
   bool _validate = false;
   final password1 = TextEditingController();
@@ -128,12 +128,21 @@ class _Register5State extends State<Register5> {
               });
               if (!_validate) {
                 if (password2.text == password1.text) {
-                  if (connection.isClosed) {
-                    await connection.open();
-                  }
                   pwd = password1.text;
-                  await connection.mappedResultsQuery(
-                      "update public.\"SaiUsers\" set \"Password\"='$pwd' where \"Email\" = '$x'");
+                  var pwdmail = widget.mail;
+                  print(pwd);
+                  print(pwdmail);
+                  http.put(
+                    Uri.parse('http://www.logimes.com:3300/MajUserPass'),
+                    headers: <String, String>{
+                      'Content-Type': 'application/json; charset=UTF-8',
+                    },
+                    body: jsonEncode(<String, String>{
+                      "Password": '$pwd',
+                      "Email": '$pwdmail'
+                    }),
+                  );
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(

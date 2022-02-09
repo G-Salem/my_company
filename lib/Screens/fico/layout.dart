@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_company/Screens/fico/financialManagement.dart';
+import 'package:my_company/Screens/home/home.dart';
+import 'package:my_company/Screens/others/notification.dart';
 import 'package:my_company/constants.dart';
 import 'package:my_company/layouts/navBar.dart';
 import 'package:postgres/postgres.dart';
@@ -13,13 +15,13 @@ class Layout extends StatefulWidget {
 class _LayoutState extends State<Layout> {
   SharedPreferences prefs;
   
-  var connection = new PostgreSQLConnection("10.0.2.2", 5432, "Logimes",
+  var connection = new PostgreSQLConnection("www.logimes.com", 5432, "Logimes",
       username: "postgres", password: "admin");
-  int _currentIndex = 0;
+  int _currentIndex = 1;
   int compteur;
   final tabs = [
     FinancialManagement(),
-    Center(child: Text("HR")),
+    HomeInside(),
     Center(child: Text("Equipement")),
     Center(child: Text("Products")),
   ];
@@ -41,13 +43,36 @@ class _LayoutState extends State<Layout> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        drawer: NavBar(),
-        backgroundColor: kInsideColor,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [tabs[_currentIndex]],
+       appBar: AppBar(
+          title: Text(
+            'Financial Management',
+            style: TextStyle(color: Colors.white),
           ),
-        ),
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back_ios, color: Colors.grey),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          backgroundColor: kInsideColor.withOpacity(0.3),
+          actions: [
+            Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return AllNotifs();
+                        },
+                      ),
+                    );
+                  },
+                  child: Icon(Icons.notifications),
+                )),
+         
+          ]),
+      
+        drawer: NavBar(),
         bottomNavigationBar: BottomNavigationBar(
           elevation: 70,
           currentIndex: _currentIndex,
@@ -67,8 +92,8 @@ class _LayoutState extends State<Layout> {
                 label: "Finance",
                 backgroundColor: Colors.white),
             BottomNavigationBarItem(
-              icon: Icon(Icons.people),
-              label: "HR",
+              icon: Icon(Icons.home),
+              label: "Home",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.people),
@@ -84,6 +109,15 @@ class _LayoutState extends State<Layout> {
               _currentIndex = index;
             });
           },
-        ));
+        ),
+        backgroundColor: kInsideColor,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [tabs[_currentIndex]],
+          ),
+        ),
+    
+        
+        );
   }
 }

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:my_company/Screens/others/accountSettings.dart';
 import 'package:my_company/Screens/others/configuration.dart';
 import 'package:my_company/Screens/others/helpCenter.dart';
 
@@ -31,7 +32,10 @@ class NavBar extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.person),
               title: Text('Account settings'),
-              onTap: () => null,
+              onTap: () => 
+              {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> AccountSetting()))
+              },
             ),
             ListTile(
               leading: Icon(Icons.help),

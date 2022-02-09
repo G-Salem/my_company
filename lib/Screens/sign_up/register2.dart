@@ -1,10 +1,16 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:my_company/Screens/sign_up/register3.dart';
 import 'package:my_company/components/rounded_button.dart';
+import 'package:my_company/models/Session.dart';
 import 'package:postgres/postgres.dart';
 import '../../constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class Register2 extends StatefulWidget {
   @override
@@ -12,8 +18,6 @@ class Register2 extends StatefulWidget {
 }
 
 class _Register2State extends State<Register2> {
-  var connection = new PostgreSQLConnection("10.0.2.2", 5432, "Logimes",
-      username: "postgres", password: "admin");
   SharedPreferences prefs;
   String cName;
   Future variable;
@@ -35,8 +39,7 @@ class _Register2State extends State<Register2> {
 
   @override
   void initState() {
-    _getThingsOnStartup().then((value) {
-    });
+    _getThingsOnStartup().then((value) {});
     super.initState();
   }
 
@@ -79,15 +82,19 @@ class _Register2State extends State<Register2> {
                                     color: kPrimaryLightColor),
                               );
                             } else {
-                              return Center( child: Text("Logidas" , style:TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 30.0,
-                                    fontWeight: FontWeight.normal,
-                                    color: kPrimaryLightColor) ,),
-                              //     child: SpinKitRotatingCircle(
-                              //   color: Colors.white,
-                               //   size: 50.0,
-                              // )
+                              return Center(
+                                child: Text(
+                                  "Logidas",
+                                  style: TextStyle(
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 30.0,
+                                      fontWeight: FontWeight.normal,
+                                      color: kPrimaryLightColor),
+                                ),
+                                //     child: SpinKitRotatingCircle(
+                                //   color: Colors.white,
+                                //   size: 50.0,
+                                // )
                               );
                             }
                           } while (snapshot.data != cName);
@@ -118,35 +125,50 @@ class _Register2State extends State<Register2> {
             RoundedButton(
               text: "Continue",
               press: () async {
-                final String sName = sessionNameController.text;
+                final String sName = sessionNameController.text.toString();
                 setState(() {
                   sessionNameController.text.isEmpty
                       ? _validate = true
                       : _validate = false;
                 });
-                if (connection.isClosed) {
-                  await connection.open();
-                }
-                List<Map<String, Map<String, dynamic>>> selectionResult =
-                    await connection.mappedResultsQuery(
-                        "SELECT \"IdSession\" FROM public.\"SaiSession\"WHERE \"SessionName\" = '$sName'");
-
-                 var idSession = selectionResult[0]["SaiSession"]["IdSession"] ;
-
-                if (idSession == null) {
-                  print("AAA");
-                  // i didn't know how to test it 
-                  // le test 3al nul ==> alert dialog w nafs'ha mta3 el page loula 
-                } else {
-                      prefs.setInt("idSession", idSession);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Register3();
-                    },
-                  ),
-                );
+                var url = Uri.parse("http://www.logimes.com:3300/Session/$sName");
+                final response = await http.get(url);
+                var responseData = json.decode(response.body);
+                 var sessionID;
+                for (var Soc in responseData) {
+                  Session session = Session(
+                      idSession: Soc["IdSession"],
+                      sessionName: Soc["SessionName"]);
+                   sessionID = session.idSession;
+                  if (sessionID == null) {
+                    AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.ERROR,
+                      animType: AnimType.BOTTOMSLIDE,
+                      title: 'Wrong session name',
+                      desc:
+                          'Please check your session name or contact an administrator',
+                      btnCancelOnPress: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Register2()));
+                      },
+                      btnCancelColor: kSecondaryColor,
+                      btnOkColor: RoundedButtonColor,
+                      btnOkOnPress: () {
+                        exit(0);
+                      },
+                    )..show();
+                  } else {
+                    prefs.setInt("idSession", sessionID);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return Register3();
+                        },
+                      ),
+                    );
+                  }
                 }
               },
             ),

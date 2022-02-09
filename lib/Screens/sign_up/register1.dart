@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +33,8 @@ class _Register1State extends State<Register1> {
     //     "www.logimes.com", 5432, "Logimes",
     //     username: "postgres", password: "Logime\$2022");
 
-    var connection = new PostgreSQLConnection("10.0.2.2", 5432, "Logimes",
-        username: "postgres", password: "admin");
+    // var connection = new PostgreSQLConnection("41.226.34.210", 5432, "Logimes",
+    //     username: "postgres", password: "admin");
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -93,14 +94,13 @@ class _Register1State extends State<Register1> {
                       ? _validate = true
                       : _validate = false;
                 });
-                await connection.open();
-                if (connection.isClosed) {
-                  await connection.open();
-                }
-                String url = "http://10.0.2.2:3300/Soc";
-                final response = await http.get(Uri.parse(url));
+                // await connection.open();
+                // if (connection.isClosed) {
+                //   await connection.open();
+                // }
+                var url =Uri.parse( "http://www.logimes.com:3300/Soc");
+                final response = await http.get(url);
                 var responseData = json.decode(response.body);
-                List<Societe> societes = [];
                 // ignore: non_constant_identifier_names
                 for (var Soc in responseData) {
                   Societe societe = Societe(
@@ -168,23 +168,24 @@ class _Register1State extends State<Register1> {
     );
   }
 
-  Future<List<Societe>> getAllFromSaiSoc() async {
-    String url = "http://10.0.2.2:3300/Soc";
-    final response = await http.get(Uri.parse(url));
+  // Future<List<Societe>> getAllFromSaiSoc() async {
+  //   String url = "http://www.logimes.com:5434/Soc";
+  //   final response = await http.get(Uri.parse(url));
 
-    var responseData = json.decode(response.body);
-    // print(responseData);
-    List<Societe> societes = [];
+  //   var responseData = json.decode(response.body);
+  //   // print(responseData);
+  //   List<Societe> societes = [];
 
-    // ignore: non_constant_identifier_names
-    for (var Soc in responseData) {
-      Societe societe = Societe(
-        matFiscale: Soc["MatFiscale"],
-        nomSociete: Soc["NomSociete"],
-      );
-      societes.add(societe);
-    }
-    return societes;
-    // print(societes[0].matFiscale);
-  }
+  //   // ignore: non_constant_identifier_names
+  //   for (var Soc in responseData) {
+  //     Societe societe = Societe(
+  //       matFiscale: Soc["MatFiscale"],
+  //       nomSociete: Soc["NomSociete"],
+  //     );
+  //     societes.add(societe);
+  //   }
+  //   return societes;
+  //   // print(societes[0].matFiscale);
+  // }
+
 }

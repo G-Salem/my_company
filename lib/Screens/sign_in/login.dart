@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -9,6 +10,7 @@ import 'package:my_company/components/rounded_button.dart';
 import 'package:postgres/postgres.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../constants.dart';
+import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
   @override
@@ -16,8 +18,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  var connection = new PostgreSQLConnection("10.0.2.2", 5432, "Logimes",
-      username: "postgres", password: "admin");
   SharedPreferences prefs;
   final mail = TextEditingController();
   final pwd = TextEditingController();
@@ -28,13 +28,11 @@ class _LoginState extends State<Login> {
   _getThingsOnStartup() async {
     WidgetsFlutterBinding.ensureInitialized();
     prefs = await SharedPreferences.getInstance();
-    await connection.open();
   }
 
   @override
   void initState() {
-    _getThingsOnStartup().then((value) {
-    });
+    _getThingsOnStartup().then((value) {});
     super.initState();
   }
 
@@ -89,14 +87,16 @@ class _LoginState extends State<Login> {
             child: TextFormField(
               obscureText: _obscure,
               decoration: InputDecoration(
-                suffixIcon: GestureDetector(
+                  suffixIcon: GestureDetector(
                     onTap: () {
                       setState(() {
                         _obscure = !_obscure;
                       });
                     },
                     child: Icon(
-                        _obscure ? Icons.visibility : Icons.visibility_off , color: Colors.white,),
+                      _obscure ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.white,
+                    ),
                   ),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white, width: 0.4),
@@ -124,11 +124,8 @@ class _LoginState extends State<Login> {
               });
 
               if (!_validate) {
-                if (connection.isClosed) {
-                  await connection.open();
-                }
                 var x = await checkCredentials(mail.text, pwd.text);
-                if (( x > 0)) {
+                if ((x > 0)) {
                   await prefs.setInt("compteur", x);
                   Navigator.push(
                     context,
@@ -186,17 +183,21 @@ class _LoginState extends State<Login> {
 
   Future<int> checkCredentials(String email, pass) async {
     var compteur = 0;
-    List<
-        Map<
-            String,
-            Map<String,
-                dynamic>>> selectionResult = await connection.mappedResultsQuery(
-        "SELECT \"compteur\" FROM public.\"SaiUsers\" WHERE \"Email\" = '$email' and \"Password\" = '$pass'");
-    if (selectionResult.isNotEmpty) {
-      compteur = selectionResult[0]["SaiUsers"]["compteur"];
+    var response = await http.post(
+      Uri.parse('http://www.logimes.com:3300/login'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "Email": '$email',
+        "Password": '$pass'
+      }),
+    );
+    print(response.body);
+    if (response.body == null) {
+      return -1;
     } else {
-      compteur = -1;
+      return  2;
     }
-    return compteur;
   }
 }

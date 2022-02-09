@@ -7,4 +7,5 @@ const CopyRightColor = Color(0xFFCBC9CC);
 const kSecondaryColor= Color(0xffF3A530);
 const kInsideColor= Color(0xff1F1A43);
 const kBottomColor= Color(0xff08022D);
+const kCardFinColor= Color(0xFF373257);
 // const url = "http://localhost:3300/";

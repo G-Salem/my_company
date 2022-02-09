@@ -83,11 +83,6 @@ class _Register3State extends State<Register3> {
                     animType: AnimType.BOTTOMSLIDE,
                     title: 'Succes',
                     desc: 'The verification code was sent to your email',
-                    // btnCancelOnPress: () {
-                    //   Navigator.of(context).push(
-                    //       MaterialPageRoute(builder: (context) => Register3()));
-                    // },
-                    // btnCancelColor: kSecondaryColor,
                     btnOkColor: kSecondaryColor,
                     btnOkOnPress: () {
                       Navigator.push(
