@@ -1,13 +1,13 @@
+// ignore_for_file: await_only_futures
+
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:my_company/Screens/sign_up/register3.dart';
 import 'package:my_company/components/rounded_button.dart';
 import 'package:my_company/models/Session.dart';
-import 'package:postgres/postgres.dart';
 import '../../constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -31,7 +31,6 @@ class _Register2State extends State<Register2> {
   }
 
   Future<String> getPrefs(String content) async {
-    // ignore: await_only_futures
     var x = await prefs.getString(content);
 
     return x;
@@ -131,10 +130,11 @@ class _Register2State extends State<Register2> {
                       ? _validate = true
                       : _validate = false;
                 });
-                var url = Uri.parse("http://www.logimes.com:3300/Session/$sName");
+                var url = Uri.parse("http://10.0.2.2:3300/Session/$sName");
                 final response = await http.get(url);
                 var responseData = json.decode(response.body);
                  var sessionID;
+                // ignore: non_constant_identifier_names
                 for (var Soc in responseData) {
                   Session session = Session(
                       idSession: Soc["IdSession"],

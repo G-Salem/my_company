@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:my_company/Screens/others/notification.dart';
 import 'package:my_company/constants.dart';
 import 'package:my_company/layouts/navBar.dart';
@@ -55,23 +56,19 @@ class _AccountSettingState extends State<AccountSetting> {
               icon: SizedBox(
                 height: size.height * 0.05,
                 child: Icon(
-                  Icons.money,
+                  Boxicons.bx_wallet, size: 30,
                   // color: Colors.white,
                 ),
               ),
               label: "Finance",
               backgroundColor: Colors.white),
           BottomNavigationBarItem(
-            icon: Icon(Icons.people),
+            icon: Icon(Boxicons.bx_user, size: 30),
             label: "HR",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: "Equipment",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Production",
+            icon: Icon(Boxicons.bxs_box, size: 30),
+            label: "Stock",
           ),
         ],
         onTap: (index) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_company/Screens/splash/splashScreen.dart';
+import 'package:my_company/Screens/others/onBoarding.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'My Company',
-      home: SplashScreen(),
+      home: OnboardingScreen(),
     );
   }
 }

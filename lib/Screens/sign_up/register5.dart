@@ -5,7 +5,6 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:my_company/Screens/sign_in/login.dart';
 import 'package:my_company/components/rounded_button.dart';
-import 'package:postgres/postgres.dart';
 import '../../constants.dart';
 import 'package:http/http.dart' as http;
 
@@ -133,7 +132,7 @@ class _Register5State extends State<Register5> {
                   print(pwd);
                   print(pwdmail);
                   http.put(
-                    Uri.parse('http://www.logimes.com:3300/MajUserPass'),
+                    Uri.parse('http://10.0.2.2:3300/MajUserPass'),
                     headers: <String, String>{
                       'Content-Type': 'application/json; charset=UTF-8',
                     },

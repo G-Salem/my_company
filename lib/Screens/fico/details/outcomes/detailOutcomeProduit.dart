@@ -1,24 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boxicons/flutter_boxicons.dart';
+import 'package:my_company/Screens/fico/financialManagement.dart';
 import 'package:my_company/Screens/others/notification.dart';
+import 'package:flutter_boxicons/flutter_boxicons.dart';
+import 'package:my_company/components/detailCardProduit.dart';
+import 'package:my_company/constants.dart';
 import 'package:my_company/layouts/navBar.dart';
-import '../../constants.dart';
 
-class HelpCenter extends StatefulWidget {
+class DetailOutcomeProduit extends StatefulWidget {
+  final SortiesProd sortie;
+  DetailOutcomeProduit({Key key, this.sortie}) : super(key: key);
+
   @override
-  _HelpCenterState createState() => _HelpCenterState();
+  State<DetailOutcomeProduit> createState() => _DetailOutcomeProduitState();
 }
 
-class _HelpCenterState extends State<HelpCenter> {
-  TextEditingController searchEditingController = TextEditingController();
+List<bool> isSelected;
+List<DetailsProd> det = [
+  DetailsProd(
+      id: 1,
+      nom: "Yaought Normal",
+      quantite: "5000",
+      date: "12 Janvier 2022",
+      prix: "2000 Tnd"),
+  DetailsProd(
+      id: 2,
+      nom: "Fromage",
+      quantite: "400",
+      date: "12 Janvier 2022",
+      prix: "4000 Tnd"),
+  DetailsProd(
+      id: 3,
+      nom: "lait",
+      quantite: "150",
+      date: "12 Janvier 2022",
+      prix: "1050 Tnd"),
+  DetailsProd(
+      id: 4,
+      nom: "Rayeb",
+      quantite: "475",
+      date: "12 Janvier 2022",
+      prix: "950 Tnd"),
+];
+
+class _DetailOutcomeProduitState extends State<DetailOutcomeProduit> {
+  @override
+  void initState() {
+    isSelected = [true, false];
+    super.initState();
+  }
+
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var _currentIndex;
+
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            'Help Center',
+            widget.sortie.nomProd,
             style: TextStyle(color: Colors.white),
           ),
           leading: new IconButton(
@@ -44,7 +84,6 @@ class _HelpCenterState extends State<HelpCenter> {
                 )),
           ]),
       drawer: NavBar(),
-      backgroundColor: kInsideColor,
       bottomNavigationBar: BottomNavigationBar(
         elevation: 70,
         currentIndex: _currentIndex,
@@ -79,47 +118,22 @@ class _HelpCenterState extends State<HelpCenter> {
           });
         },
       ),
+      backgroundColor: kInsideColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: size.height * 0.22),
-            Padding(
-              padding: const EdgeInsets.only(left: 25.0),
-              child: Row(
-                children: [
-                  Text(
-                    "Looking for something ",
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.normal,
-                        color: kPrimaryLightColor),
-                  ),
-                  // Icon(
-                  //   Icons.help_center,
-                  //   color: Colors.white,
-                  // ),
-                ],
-              ),
-            ),
-            SizedBox(height: size.height * 0.12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
-              child: TextField(
-                controller: searchEditingController,
-                style: TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 0.4),
-                        borderRadius: BorderRadius.all(Radius.circular(25.0))),
-                    labelText: "Search",
-                    labelStyle: TextStyle(color: Colors.white),
-                    hintText: "Search",
-                    suffixIcon: Icon(Icons.search, color: Colors.white),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 0.4),
-                        borderRadius: BorderRadius.all(Radius.circular(25.0)))),
-              ),
+            SizedBox(height: size.height * 0.05),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                for (var i = 0; i < det.length; i++)
+                  Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: DetailCardProduitt(
+                        nom: det[i].nom,
+                        prix: det[i].prix,
+                      )),
+              ],
             ),
           ],
         ),
@@ -128,5 +142,9 @@ class _HelpCenterState extends State<HelpCenter> {
   }
 }
 
+class DetailsProd {
+  int id;
+  String nom, quantite, date, prix;
 
-                      // final a=await connection.execute("SELECT \"NomSociete\" FROM public.\"SaiSoc\" WHERE \"MatFiscale\" = \"123456/A/A/000\"" ) ;
+  DetailsProd({this.id, this.nom, this.date, this.quantite, this.prix});
+}

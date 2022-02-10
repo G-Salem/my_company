@@ -8,7 +8,7 @@ class HomeInside extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(height: size.height * 0.15),
+          // SizedBox(height: size.height * 0.),
           Center(
             child: Container(
                 padding:  EdgeInsets.fromLTRB(0, 5, 20, 0),

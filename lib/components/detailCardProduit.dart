@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
 
-class FinanceCard extends StatelessWidget {
-  final String title, money;
+class DetailCardProduitt extends StatelessWidget {
+  final String nom, prix;
   final Function press;
-  final Color color;
-  final String date;
-  const FinanceCard({
-    Key key,
-    this.title,
-    this.money,
-    this.date,
-    this.press,
-    this.color = kCardFinColor,
-  }) : super(key: key);
+  const DetailCardProduitt({Key key, this.nom, this.prix, this.press})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +14,10 @@ class FinanceCard extends StatelessWidget {
         child: new Stack(
           children: <Widget>[
             Container(
-                height: 100.0,
-                width: 328,
+                height: 63.0,
+                width: 370,
                 decoration: new BoxDecoration(
-                    color: color.withOpacity(0.8),
+                    color: Color(0xff3D385C).withOpacity(0.7),
                     shape: BoxShape.rectangle,
                     borderRadius: new BorderRadius.circular(15.0),
                     boxShadow: <BoxShadow>[
@@ -36,36 +27,27 @@ class FinanceCard extends StatelessWidget {
                           offset: new Offset(07.0, 10.0))
                     ])),
             Container(
-              margin: EdgeInsets.only(top: 25, left: 29),
+              margin: EdgeInsets.only(top: 24, left: 40),
               child: Text(
-                title,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Montesserat',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 225, top: 39),
-              child: Text(
-                money,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Montesserat',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 60, left: 29),
-              child: Text(
-                date,
+                nom,
                 style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Montesserat',
                     fontSize: 12,
-                    fontWeight: FontWeight.w300),
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w400),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 24, left: 270),
+              child: Text(
+                prix,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Montesserat',
+                    fontSize: 12,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w400),
               ),
             ),
           ],

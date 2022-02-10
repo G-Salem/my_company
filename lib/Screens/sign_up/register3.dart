@@ -119,6 +119,7 @@ class _Register3State extends State<Register3> {
     String username = 'mycomanylogimes@gmail.com';
     String password = 'ali@ali@ali';
 
+    // ignore: deprecated_member_use
     final smtpServer = gmail(username, password);
     final message = Message()
       ..from = Address(username, 'SALEM')

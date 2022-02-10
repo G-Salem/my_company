@@ -3,11 +3,10 @@ import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:my_company/Screens/fico/layout.dart';
+import 'package:my_company/Screens/others/onBoarding.dart';
 import 'package:my_company/Screens/sign_up/register3.dart';
 import 'package:my_company/components/forgotYourPwd.dart';
 import 'package:my_company/components/rounded_button.dart';
-import 'package:postgres/postgres.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../constants.dart';
 import 'package:http/http.dart' as http;
@@ -21,7 +20,6 @@ class _LoginState extends State<Login> {
   SharedPreferences prefs;
   final mail = TextEditingController();
   final pwd = TextEditingController();
-  String _passDb;
   bool _validate = false;
   bool _obscure = true;
 
@@ -131,7 +129,7 @@ class _LoginState extends State<Login> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return Layout();
+                        return OnboardingScreen();
                       },
                     ),
                   );
@@ -182,9 +180,8 @@ class _LoginState extends State<Login> {
   }
 
   Future<int> checkCredentials(String email, pass) async {
-    var compteur = 0;
     var response = await http.post(
-      Uri.parse('http://www.logimes.com:3300/login'),
+      Uri.parse('http://10.0.2.2:3300/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

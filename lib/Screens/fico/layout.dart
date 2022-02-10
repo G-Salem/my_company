@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:my_company/Screens/fico/financialManagement.dart';
 import 'package:my_company/Screens/home/home.dart';
 import 'package:my_company/Screens/others/notification.dart';
 import 'package:my_company/constants.dart';
 import 'package:my_company/layouts/navBar.dart';
-import 'package:postgres/postgres.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Layout extends StatefulWidget {
@@ -14,21 +14,21 @@ class Layout extends StatefulWidget {
 
 class _LayoutState extends State<Layout> {
   SharedPreferences prefs;
-  
-  var connection = new PostgreSQLConnection("www.logimes.com", 5432, "Logimes",
-      username: "postgres", password: "admin");
-  int _currentIndex = 1;
+  int _currentIndex = 3;
   int compteur;
+  String title = "Home";
+  final titleAppBar = ["financial Management", "HR", "Products", "Home"];
   final tabs = [
     FinancialManagement(),
-    HomeInside(),
     Center(child: Text("Equipement")),
     Center(child: Text("Products")),
+    HomeInside(),
   ];
 
   _getThingsOnStartup() async {
     WidgetsFlutterBinding.ensureInitialized();
     prefs = await SharedPreferences.getInstance();
+    // ignore: await_only_futures
     compteur = await prefs.getInt("compteur");
     // shared prefs ennajmou enna7iwha w n7ottouha fel navbar()
   }
@@ -43,14 +43,12 @@ class _LayoutState extends State<Layout> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-       appBar: AppBar(
-          title: Text(
-            'Financial Management',
-            style: TextStyle(color: Colors.white),
-          ),
-          leading: new IconButton(
-            icon: new Icon(Icons.arrow_back_ios, color: Colors.grey),
-            onPressed: () => Navigator.of(context).pop(),
+      appBar: AppBar(
+          title: Center(
+            child: Text(
+              title.toUpperCase(),
+              style: TextStyle(color: Colors.white),
+            ),
           ),
           backgroundColor: kInsideColor.withOpacity(0.3),
           actions: [
@@ -69,55 +67,53 @@ class _LayoutState extends State<Layout> {
                   },
                   child: Icon(Icons.notifications),
                 )),
-         
           ]),
-      
-        drawer: NavBar(),
-        bottomNavigationBar: BottomNavigationBar(
-          elevation: 70,
-          currentIndex: _currentIndex,
-          type: BottomNavigationBarType.fixed,
-          // selectedItemColor: Colors.white,
-          selectedItemColor: kSecondaryColor,
-          unselectedItemColor: Colors.grey,
-          backgroundColor: kBottomColor,
-          items: [
-            BottomNavigationBarItem(
-            icon: SizedBox(height: size.height * 0.05,
-                  child: Icon(
-                    Icons.money,
-                    // color: Colors.white,
-                  ),
+      drawer: NavBar(),
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 70,
+        currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
+        // selectedItemColor: Colors.white,
+        selectedItemColor: kSecondaryColor,
+        unselectedItemColor: Colors.grey,
+        backgroundColor: kBottomColor,
+        items: [
+          BottomNavigationBarItem(
+              icon: SizedBox(
+                height: size.height * 0.05,
+                child: Icon(
+                  Boxicons.bx_wallet, size: 30,
+                  // color: Colors.white,
                 ),
-                label: "Finance",
-                backgroundColor: Colors.white),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: "Home",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.people),
-              label: "Equipment",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: "Production",
-            ),
-          ],
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-        ),
-        backgroundColor: kInsideColor,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [tabs[_currentIndex]],
+              ),
+              label: "Finance",
+              backgroundColor: Colors.white),
+          BottomNavigationBarItem(
+            icon: Icon(Boxicons.bx_user, size: 30),
+            label: "HR",
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Boxicons.bxs_box, size: 30),
+            label: "Stock",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Boxicons.bx_home, size: 30),
+            label: "Home",
+          ),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+            title = titleAppBar[_currentIndex];
+          });
+        },
+      ),
+      backgroundColor: kInsideColor,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [tabs[_currentIndex]],
         ),
-    
-        
-        );
+      ),
+    );
   }
 }

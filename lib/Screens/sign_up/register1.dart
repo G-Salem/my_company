@@ -1,12 +1,10 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:my_company/Screens/sign_up/register2.dart';
 import 'package:my_company/components/rounded_button.dart';
 import 'package:my_company/models/societe.dart';
-import 'package:postgres/postgres.dart';
 import '../../constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,7 +28,7 @@ class _Register1State extends State<Register1> {
   @override
   Widget build(BuildContext context) {
     // var connection = new PostgreSQLConnection(
-    //     "www.logimes.com", 5432, "Logimes",
+    //     "10.0.2.2", 5432, "Logimes",
     //     username: "postgres", password: "Logime\$2022");
 
     // var connection = new PostgreSQLConnection("41.226.34.210", 5432, "Logimes",
@@ -98,7 +96,7 @@ class _Register1State extends State<Register1> {
                 // if (connection.isClosed) {
                 //   await connection.open();
                 // }
-                var url =Uri.parse( "http://www.logimes.com:3300/Soc");
+                var url =Uri.parse( "http://10.0.2.2:3300/Soc");
                 final response = await http.get(url);
                 var responseData = json.decode(response.body);
                 // ignore: non_constant_identifier_names
@@ -169,7 +167,7 @@ class _Register1State extends State<Register1> {
   }
 
   // Future<List<Societe>> getAllFromSaiSoc() async {
-  //   String url = "http://www.logimes.com:5434/Soc";
+  //   String url = "http://10.0.2.2:5434/Soc";
   //   final response = await http.get(Uri.parse(url));
 
   //   var responseData = json.decode(response.body);
