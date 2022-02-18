@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         home: AnimatedSplashScreen(
             duration: 3000,
             splash: 'assets/logimesLogo.png',
-            nextScreen: SplashScreen(),
+            nextScreen: OnboardingScreen(),
             splashTransition: SplashTransition.fadeTransition,
             backgroundColor: kPrimaryColor));
   }

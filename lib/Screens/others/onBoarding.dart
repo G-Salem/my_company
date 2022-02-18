@@ -84,7 +84,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
                 Container(
-                  height: 600.0,
+                  height: 400.0,
+                  // height: 400.0,
                   child: PageView(
                     physics: ClampingScrollPhysics(),
                     controller: _pageController,
@@ -95,7 +96,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     },
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.all(30.0),
+                        padding: EdgeInsets.all(0.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -109,28 +110,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ),
                             ),
                             SizedBox(height: 30.0),
-                            Text(
-                              'Easy tracking of your \nfinancial situation',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Montesserat',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 18),
+                            Center(
+                              child: Text(
+                                'Easy tracking of your financial situation',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Montesserat',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 18),
+                              ),
                             ),
                             SizedBox(height: 50.0),
-                            Text(
-                              'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Montesserat',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12),
-                            ),
+                            
                           ],
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(30.0),
+                        padding: EdgeInsets.all(0.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -144,28 +140,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ),
                             ),
                             SizedBox(height: 30.0),
-                            Text(
-                              'Production \nmanagement',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Montesserat',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 18),
+                            Center(
+                              child: Text(
+                                'Production management',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Montesserat',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 18),
+                              ),
                             ),
                             SizedBox(height: 15.0),
-                            Text(
-                              'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Montesserat',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12),
-                            ),
+                            
                           ],
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(30.0),
+                        padding: EdgeInsets.all(0.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -179,23 +170,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ),
                             ),
                             SizedBox(height: 30.0),
-                            Text(
-                              'Human ressources \nmanagement',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Montesserat',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 18),
+                            Center(
+                              child: Text(
+                                'Human ressources management',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Montesserat',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 18),
+                              ),
                             ),
                             SizedBox(height: 15.0),
-                            Text(
-                              'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Montesserat',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12),
-                            ),
+                            
                           ],
                         ),
                       ),

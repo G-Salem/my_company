@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
-
-import 'package:my_company/Screens/fico/details/revenues/detailCheque.dart';
-import 'package:my_company/Screens/fico/financialManagement.dart';
 import 'package:my_company/Screens/others/notification.dart';
-import 'package:my_company/components/detailCardClient.dart';
 import 'package:my_company/components/humainRessourcesCard.dart';
 import 'package:my_company/constants.dart';
 import 'package:my_company/layouts/navBar.dart';
