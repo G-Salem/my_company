@@ -132,7 +132,7 @@ class _Register5State extends State<Register5> {
                   print(pwd);
                   print(pwdmail);
                   http.put(
-                    Uri.parse('http://10.0.2.2:3300/MajUserPass'),
+                    Uri.parse('http://www.logimes.com:3300/MajUserPass'),
                     headers: <String, String>{
                       'Content-Type': 'application/json; charset=UTF-8',
                     },

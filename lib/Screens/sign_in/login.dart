@@ -25,6 +25,7 @@ class _LoginState extends State<Login> {
 
   _getThingsOnStartup() async {
     WidgetsFlutterBinding.ensureInitialized();
+    // prefs = await SharedPreferences.getInstance();
     prefs = await SharedPreferences.getInstance();
   }
 
@@ -166,7 +167,7 @@ class _LoginState extends State<Login> {
               );
             },
           ),
-          SizedBox(height: size.height * 0.25),
+          SizedBox(height: size.height * 0.135),
           Center(
               child: Text(
             "Copy right 2022- Version 1.0",
@@ -181,7 +182,7 @@ class _LoginState extends State<Login> {
 
   Future<int> checkCredentials(String email, pass) async {
     var response = await http.post(
-      Uri.parse('http://10.0.2.2:3300/login'),
+      Uri.parse('http://www.logimes.com:3300/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -191,7 +192,7 @@ class _LoginState extends State<Login> {
       }),
     );
     print(response.body);
-    if (response.body == null) {
+    if ((response.body ==  null) || (response.body.isEmpty) ) {
       return -1;
     } else {
       return  2;

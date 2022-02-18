@@ -1,55 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
+
+import 'package:my_company/Screens/fico/details/revenues/detailCheque.dart';
 import 'package:my_company/Screens/fico/financialManagement.dart';
-import 'package:my_company/Screens/home/home.dart';
-import 'package:my_company/Screens/hr/gestionRh.dart';
 import 'package:my_company/Screens/others/notification.dart';
+import 'package:my_company/components/detailCardClient.dart';
+import 'package:my_company/components/humainRessourcesCard.dart';
 import 'package:my_company/constants.dart';
 import 'package:my_company/layouts/navBar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class Layout extends StatefulWidget {
+class Taxes extends StatefulWidget {
   @override
-  _LayoutState createState() => _LayoutState();
+  State<Taxes> createState() => _TaxesState();
 }
 
-class _LayoutState extends State<Layout> {
-  SharedPreferences prefs;
-  int _currentIndex = 3;
-  int compteur;
-  String title = "Home";
-  final titleAppBar = ["financial Management", "HR", "Products", "Home"];
-  final tabs = [
-    FinancialManagement(),
-    GestionRh(),
-    Center(child: Text("Products")),
-    HomeInside(),
-  ];
+List<bool> isSelected;
 
-  _getThingsOnStartup() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    prefs = await SharedPreferences.getInstance();
-    // ignore: await_only_futures
-    compteur = await prefs.getInt("compteur");
-    // shared prefs ennajmou enna7iwha w n7ottouha fel navbar()
-  }
+List<HrDet> det = [
+  HrDet(id: 1, name: "Amine Gharbi", amount: "1850", date: "29/01/2022"),
+  HrDet(id: 1, name: "Skander Amri", amount: "1850", date: "29/01/2022"),
+  HrDet(id: 1, name: "Salma Ouni", amount: "1600", date: "28/01/2022"),
+  HrDet(id: 1, name: "Salem Gabsi", amount: "1850", date: "28/01/2022"),
+  HrDet(id: 1, name: "Marwen Hliwoui", amount: "2000", date: "28/01/2022"),
+  HrDet(id: 1, name: "Dorsaf Gharbi", amount: "2500", date: "28/01/2022"),
+];
 
+class _TaxesState extends State<Taxes> {
   @override
   void initState() {
-    _getThingsOnStartup().then((value) async {});
+    isSelected = [true, false];
     super.initState();
   }
+
+  int _currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
-          title: Center(
-            child: Text(
-              title.toUpperCase(),
-              style: TextStyle(color: Colors.white),
-            ),
+          title: Text(
+            "Taxes",
+            style: TextStyle(color: Colors.white),
+          ),
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back_ios, color: Colors.grey),
+            onPressed: () => Navigator.of(context).pop(),
           ),
           backgroundColor: kInsideColor.withOpacity(0.3),
           actions: [
@@ -97,24 +94,40 @@ class _LayoutState extends State<Layout> {
             icon: Icon(Boxicons.bxs_box, size: 30),
             label: "Stock",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Boxicons.bx_home, size: 30),
-            label: "Home",
-          ),
         ],
         onTap: (index) {
           setState(() {
             _currentIndex = index;
-            title = titleAppBar[_currentIndex];
           });
         },
       ),
       backgroundColor: kInsideColor,
       body: SingleChildScrollView(
         child: Column(
-          children: [tabs[_currentIndex]],
+          children: [
+            SizedBox(height: size.height * 0.05),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                for (var i = 0; i < det.length; i++)
+                  HumainRessourcesCard(
+                    nom: det[i].name,
+                    amount: det[i].amount,
+                    date: det[i].date,
+                  ),
+              ],
+            ),
+
+            SizedBox(height: size.height * 0.01),
+          ],
         ),
       ),
     );
   }
+}
+
+class HrDet {
+  int id;
+  String name, amount, date;
+  HrDet({this.id, this.date, this.amount, this.name});
 }

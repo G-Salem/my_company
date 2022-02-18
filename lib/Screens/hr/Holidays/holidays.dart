@@ -1,55 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
+
+import 'package:my_company/Screens/fico/details/revenues/detailCheque.dart';
 import 'package:my_company/Screens/fico/financialManagement.dart';
-import 'package:my_company/Screens/home/home.dart';
-import 'package:my_company/Screens/hr/gestionRh.dart';
 import 'package:my_company/Screens/others/notification.dart';
+import 'package:my_company/components/detailCardClient.dart';
+import 'package:my_company/components/humainRessourcesCard.dart';
 import 'package:my_company/constants.dart';
 import 'package:my_company/layouts/navBar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class Layout extends StatefulWidget {
+class Holidays extends StatefulWidget {
   @override
-  _LayoutState createState() => _LayoutState();
+  State<Holidays> createState() => _HolidaysState();
 }
 
-class _LayoutState extends State<Layout> {
-  SharedPreferences prefs;
-  int _currentIndex = 3;
-  int compteur;
-  String title = "Home";
-  final titleAppBar = ["financial Management", "HR", "Products", "Home"];
-  final tabs = [
-    FinancialManagement(),
-    GestionRh(),
-    Center(child: Text("Products")),
-    HomeInside(),
-  ];
+class _HolidaysState extends State<Holidays> {
 
-  _getThingsOnStartup() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    prefs = await SharedPreferences.getInstance();
-    // ignore: await_only_futures
-    compteur = await prefs.getInt("compteur");
-    // shared prefs ennajmou enna7iwha w n7ottouha fel navbar()
-  }
-
-  @override
-  void initState() {
-    _getThingsOnStartup().then((value) async {});
-    super.initState();
-  }
+  int _currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
-          title: Center(
-            child: Text(
-              title.toUpperCase(),
-              style: TextStyle(color: Colors.white),
-            ),
+          title: Text(
+            "Holidays",
+            style: TextStyle(color: Colors.white),
+          ),
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back_ios, color: Colors.grey),
+            onPressed: () => Navigator.of(context).pop(),
           ),
           backgroundColor: kInsideColor.withOpacity(0.3),
           actions: [
@@ -97,24 +78,46 @@ class _LayoutState extends State<Layout> {
             icon: Icon(Boxicons.bxs_box, size: 30),
             label: "Stock",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Boxicons.bx_home, size: 30),
-            label: "Home",
-          ),
         ],
         onTap: (index) {
           setState(() {
             _currentIndex = index;
-            title = titleAppBar[_currentIndex];
           });
         },
       ),
       backgroundColor: kInsideColor,
       body: SingleChildScrollView(
         child: Column(
-          children: [tabs[_currentIndex]],
+          children: [
+            SizedBox(height: size.height * 0.05),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                HumainRessourcesCard(
+                  nom: " Year of 2022",
+                  amount: " Number of Folidays Left",
+                  date: "15 Days",
+                ),
+              ],
+            ),
+            SizedBox(height: size.height * 0.1),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Text(
+                "Ask for a vacation day(s) ",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "Montserrat",
+                    fontWeight: FontWeight.w600,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 16),
+              ),
+            )
+
+          ],
         ),
       ),
     );
   }
 }
+

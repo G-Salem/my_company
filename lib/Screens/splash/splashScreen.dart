@@ -15,6 +15,8 @@ class SplashScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: size.height * 0.07),
+
             Center(
               child: Container(
                 child: Image.asset(
@@ -34,7 +36,7 @@ class SplashScreen extends StatelessWidget {
                   fontWeight: FontWeight.normal,
                   color: kPrimaryLightColor),
             )),
-            SizedBox(height: size.height * 0.25),
+            SizedBox(height: size.height * 0.2),
             RoundedButton(
               text: "SIGN UP",
               press: () {

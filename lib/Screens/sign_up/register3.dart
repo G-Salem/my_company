@@ -45,7 +45,7 @@ class _Register3State extends State<Register3> {
                   fontWeight: FontWeight.normal,
                   color: kPrimaryLightColor),
             )),
-            SizedBox(height: size.height * 0.17),
+            SizedBox(height: size.height * 0.12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 0),
               child: TextFormField(
@@ -66,7 +66,7 @@ class _Register3State extends State<Register3> {
                 style: TextStyle(color: Colors.white),
               ),
             ),
-            SizedBox(height: size.height * 0.1),
+            SizedBox(height: size.height * 0.13),
             RoundedButton(
               text: "Continue",
               press: () async {
@@ -99,7 +99,7 @@ class _Register3State extends State<Register3> {
                 }
               },
             ),
-            SizedBox(height: size.height * 0.2),
+            SizedBox(height: size.height * 0.17),
             Center(
                 child: Text(
               "Copy right 2022- Version 1.0",

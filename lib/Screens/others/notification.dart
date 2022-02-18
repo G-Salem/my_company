@@ -9,6 +9,7 @@ class AllNotifs extends StatefulWidget {
 }
 
 class _AllNotifsState extends State<AllNotifs> {
+  TextEditingController searchEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -20,7 +21,7 @@ class _AllNotifsState extends State<AllNotifs> {
               style: TextStyle(color: Colors.white),
             ),
           ),
-           leading: new IconButton(
+          leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios, color: Colors.grey),
             onPressed: () => Navigator.of(context).pop(),
           ),
@@ -86,13 +87,31 @@ class _AllNotifsState extends State<AllNotifs> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: size.height * 0.05),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
+              child: TextField(
+                controller: searchEditingController,
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 3),
+                        borderRadius: BorderRadius.all(Radius.circular(25.0))),
+                    labelText: "Search",
+                    labelStyle: TextStyle(color: Colors.white),
+                    hintText: "Search",
+                    suffixIcon: Icon(Icons.search, color: Colors.white),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 0.4),
+                        borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+              ),
+            ),
             SizedBox(height: size.height * 0.1),
             GestureDetector(
               onTap: null,
               child: Container(
                 child: new Stack(
                   children: <Widget>[
-                  
                     Center(
                       child: Container(
                           height: 163.0,
@@ -118,28 +137,24 @@ class _AllNotifsState extends State<AllNotifs> {
                     Container(
                       margin: EdgeInsets.only(left: 100, top: 24, right: 50),
                       child: Text(
-                        "amountelzKNFL?  fefoIJNFEJ ZJFPRZJIFO ZRZF OJOFZ OZIJO FZNOZN OUNFZ OUNZ ZR OZNR ORZN ONFRZ ONFO RN RONF RN ",
+                        "Invoice number 124651 succefully done",
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Montesserat',
                             fontSize: 16,
-                            fontWeight: FontWeight.w400),
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
-
-                    
                   ],
                 ),
               ),
             ),
             SizedBox(height: size.height * 0.05),
-           
-           GestureDetector(
+            GestureDetector(
               onTap: null,
               child: Container(
                 child: new Stack(
                   children: <Widget>[
-                  
                     Center(
                       child: Container(
                           height: 163.0,
@@ -165,7 +180,7 @@ class _AllNotifsState extends State<AllNotifs> {
                     Container(
                       margin: EdgeInsets.only(left: 100, top: 24, right: 50),
                       child: Text(
-                        "amountelzKNFL?  fefoIJNFEJ ZJFPRZJIFO ZRZF OJOFZ OZIJO FZNOZN OUNFZ OUNZ ZR OZNR ORZN ONFRZ ONFO RN RONF RN ",
+                        "The deadline of the invoice number 995544 is due to tommorw please don't forget to get it done !!!!!",
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Montesserat',
@@ -173,14 +188,10 @@ class _AllNotifsState extends State<AllNotifs> {
                             fontWeight: FontWeight.w500),
                       ),
                     ),
-
-                    
                   ],
                 ),
               ),
             ),
-          
-          
           ],
         ),
       ),

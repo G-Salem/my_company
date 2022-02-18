@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:my_company/Screens/others/onBoarding.dart';
+import 'package:my_company/Screens/splash/splashScreen.dart';
 
 void main() {
   runApp(MyApp());
 }
-class MyApp extends StatelessWidget {  
+
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'My Company',
-      home: OnboardingScreen(),
+      home: SplashScreen(),
     );
   }
 }

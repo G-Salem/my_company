@@ -41,7 +41,7 @@ class _Register4State extends State<Register4> {
                   ),
                 ),
               ),
-              SizedBox(height: size.height * 0.25),
+              SizedBox(height: size.height * 0.2),
               Container(
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -111,7 +111,7 @@ class _Register4State extends State<Register4> {
                   }
                 },
               ),
-              SizedBox(height: size.height * 0.2),
+              SizedBox(height: size.height * 0.14),
               Center(
                   child: Text(
                 "Copy right 2022- Version 1.0",

@@ -196,7 +196,7 @@ class _FinancialManagementState extends State<FinancialManagement> {
           SizedBox(height: size.height * 0.05),
           Center(
             child: Container(
-              width: size.width * 0.9,
+              // width: 5,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(9.8),
                 color: Color(0xff2E2B42),
@@ -215,7 +215,7 @@ class _FinancialManagementState extends State<FinancialManagement> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Text(" Revenue (20 000) "),
+                    child: Text(" Revenue (20 5000) "),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 32),

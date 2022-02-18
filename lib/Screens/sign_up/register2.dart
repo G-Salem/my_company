@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:my_company/Screens/sign_up/register3.dart';
 import 'package:my_company/components/rounded_button.dart';
 import 'package:my_company/models/Session.dart';
@@ -32,7 +33,6 @@ class _Register2State extends State<Register2> {
 
   Future<String> getPrefs(String content) async {
     var x = await prefs.getString(content);
-
     return x;
   }
 
@@ -54,6 +54,7 @@ class _Register2State extends State<Register2> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: size.height * 0.05),
             Center(
               child: Container(
                 child: Image.asset(
@@ -63,7 +64,7 @@ class _Register2State extends State<Register2> {
                 ),
               ),
             ),
-            SizedBox(height: size.height * 0.15),
+            SizedBox(height: size.height * 0.1),
             Center(
                 child: Container(
                     height: 80,
@@ -82,18 +83,10 @@ class _Register2State extends State<Register2> {
                               );
                             } else {
                               return Center(
-                                child: Text(
-                                  "Logidas",
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      fontSize: 30.0,
-                                      fontWeight: FontWeight.normal,
-                                      color: kPrimaryLightColor),
-                                ),
-                                //     child: SpinKitRotatingCircle(
-                                //   color: Colors.white,
-                                //   size: 50.0,
-                                // )
+                                    child: SpinKitRotatingCircle(
+                                  color: Colors.white,
+                                  size: 50.0,
+                                )
                               );
                             }
                           } while (snapshot.data != cName);
@@ -126,11 +119,12 @@ class _Register2State extends State<Register2> {
               press: () async {
                 final String sName = sessionNameController.text.toString();
                 setState(() {
+                  getCompanyName();
                   sessionNameController.text.isEmpty
                       ? _validate = true
                       : _validate = false;
                 });
-                var url = Uri.parse("http://10.0.2.2:3300/Session/$sName");
+                var url = Uri.parse("http://www.logimes.com:3300/Session/$sName");
                 final response = await http.get(url);
                 var responseData = json.decode(response.body);
                  var sessionID;

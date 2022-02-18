@@ -45,60 +45,22 @@ class _HelpCenterState extends State<HelpCenter> {
           ]),
       drawer: NavBar(),
       backgroundColor: kInsideColor,
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 70,
-        currentIndex: _currentIndex,
-        type: BottomNavigationBarType.fixed,
-        // selectedItemColor: Colors.white,
-        selectedItemColor: kSecondaryColor,
-        unselectedItemColor: Colors.grey,
-        backgroundColor: kBottomColor,
-        items: [
-          BottomNavigationBarItem(
-              icon: SizedBox(
-                height: size.height * 0.05,
-                child: Icon(
-                  Boxicons.bx_wallet, size: 30,
-                  // color: Colors.white,
-                ),
-              ),
-              label: "Finance",
-              backgroundColor: Colors.white),
-          BottomNavigationBarItem(
-            icon: Icon(Boxicons.bx_user, size: 30),
-            label: "HR",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Boxicons.bxs_box, size: 30),
-            label: "Stock",
-          ),
-        ],
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
-      body: SingleChildScrollView(
+     body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(height: size.height * 0.22),
             Padding(
-              padding: const EdgeInsets.only(left: 25.0),
+              padding: const EdgeInsets.only(left: 50.0),
               child: Row(
                 children: [
                   Text(
                     "Looking for something ",
                     style: TextStyle(
                         fontFamily: 'Montserrat',
-                        fontSize: 30.0,
+                        fontSize: 25.0,
                         fontWeight: FontWeight.normal,
                         color: kPrimaryLightColor),
                   ),
-                  // Icon(
-                  //   Icons.help_center,
-                  //   color: Colors.white,
-                  // ),
                 ],
               ),
             ),
@@ -110,11 +72,12 @@ class _HelpCenterState extends State<HelpCenter> {
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 0.4),
+                        borderSide: BorderSide(color: Colors.white, width: 3),
                         borderRadius: BorderRadius.all(Radius.circular(25.0))),
                     labelText: "Search",
                     labelStyle: TextStyle(color: Colors.white),
                     hintText: "Search",
+                    hintStyle: TextStyle(color: Colors.white),
                     suffixIcon: Icon(Icons.search, color: Colors.white),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 0.4),
