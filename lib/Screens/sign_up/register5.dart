@@ -117,10 +117,7 @@ class _Register5State extends State<Register5> {
             press: () async {
               var pwd;
               print(x);
-              //  String pattern =
-              //     r'^(?=,*? [A-Z]).{6,}$';
               setState(() {
-                // password1.text.isEmpty | password2.text.isEmpty | !RegExp(pattern).hasMatch(password1.text)| !RegExp(pattern).hasMatch(password2.text)
                 password1.text.isEmpty | password2.text.isEmpty
                     ? _validate = true
                     : _validate = false;

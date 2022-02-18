@@ -25,7 +25,6 @@ class _LoginState extends State<Login> {
 
   _getThingsOnStartup() async {
     WidgetsFlutterBinding.ensureInitialized();
-    // prefs = await SharedPreferences.getInstance();
     prefs = await SharedPreferences.getInstance();
   }
 
@@ -69,7 +68,6 @@ class _LoginState extends State<Login> {
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white, width: 0.4),
                   ),
-                  //probleme dans la couleur
                   labelText: 'Email or Session Name or phone number',
                   errorText: _validate ? 'Email Can\'t Be Empty' : null,
                   errorStyle: TextStyle(color: kSecondaryColor),

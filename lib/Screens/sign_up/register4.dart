@@ -127,8 +127,6 @@ class _Register4State extends State<Register4> {
       ),
     );
   }
-
-// don't forget el alert ba3d el mail
   Widget _textFieldOTP({bool first, last, BuildContext context}) {
     return Container(
       height: 85,

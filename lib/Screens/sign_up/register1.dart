@@ -27,13 +27,6 @@ class _Register1State extends State<Register1> {
 
   @override
   Widget build(BuildContext context) {
-    // var connection = new PostgreSQLConnection(
-    //     "www.logimes.com", 5432, "Logimes",
-    //     username: "postgres", password: "Logime\$2022");
-
-    // var connection = new PostgreSQLConnection("41.226.34.210", 5432, "Logimes",
-    //     username: "postgres", password: "admin");
-
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kPrimaryColor,
@@ -92,10 +85,6 @@ class _Register1State extends State<Register1> {
                       ? _validate = true
                       : _validate = false;
                 });
-                // await connection.open();
-                // if (connection.isClosed) {
-                //   await connection.open();
-                // }
                 var url =Uri.parse( "http://www.logimes.com:3300/Soc");
                 final response = await http.get(url);
                 var responseData = json.decode(response.body);
@@ -115,9 +104,7 @@ class _Register1State extends State<Register1> {
                     if (registrationNumberText == number) {
                       exist = true;
                       companyName = name;
-                      // ajout du matricule fiscale dans shared prefs
                       addToprefs("registrationNumber", registrationNumberText);
-                      // ma fhemtech aalech ma y7ellech ezzouz
                       addToprefs("companyName", companyName);
                       Navigator.push(
                         context,
@@ -165,25 +152,4 @@ class _Register1State extends State<Register1> {
       ),
     );
   }
-
-  // Future<List<Societe>> getAllFromSaiSoc() async {
-  //   String url = "http://www.logimes.com:5434/Soc";
-  //   final response = await http.get(Uri.parse(url));
-
-  //   var responseData = json.decode(response.body);
-  //   // print(responseData);
-  //   List<Societe> societes = [];
-
-  //   // ignore: non_constant_identifier_names
-  //   for (var Soc in responseData) {
-  //     Societe societe = Societe(
-  //       matFiscale: Soc["MatFiscale"],
-  //       nomSociete: Soc["NomSociete"],
-  //     );
-  //     societes.add(societe);
-  //   }
-  //   return societes;
-  //   // print(societes[0].matFiscale);
-  // }
-
 }

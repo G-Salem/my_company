@@ -53,7 +53,6 @@ class _Register3State extends State<Register3> {
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 0.4),
                     ),
-                    //probleme dans la couleur
                     labelText: 'Enter your email',
                     errorText: _validate ? 'Email Can\'t Be Empty' : null,
                     errorStyle: TextStyle(color: kSecondaryColor),
